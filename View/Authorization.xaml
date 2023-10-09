@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Authorization" Height="450" Width="800">
-    <Grid>
-        
+        Title="Authorization" Height="500" Width="300">
+    <Grid Background="#ffffff">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#76e383" Height="50">
+            <TextBlock Text="Auth" Foreground="White" FontSize="20"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Login" FontSize="16" Margin="0,0,0,5"/>
+            <TextBox x:Name="TextBox"  FontSize="16"
+                                Padding="10" BorderBrush="#498c51" BorderThickness="2" Background="#F0F0F0"/>
+            <TextBlock Text="Password" FontSize="16" Margin="0,20,0,5"/>
+            <PasswordBox x:Name="PasswordBox" FontSize="16" Padding="10" BorderBrush="#498c51"
+                         BorderThickness="2" Background="#ffffff"/>
+            <Image x:Name="CaptchaImage" Width="100" Height="50" Margin="10" MouseLeftButtonUp="OnImageClicked"/>
+            <TextBox x:Name="CaptchaBox" FontSize="16" Padding="10" BorderBrush="#498c51"
+                     BorderThickness="2" Background="#FFFFFF"/>
+            <Button x:Name="LoginButton" Content="Login" Padding="10,5" Margin="0,20,0,0"
+                    Background="#498c51" Foreground="White" FontSize="16" BorderThickness="0"/>
+        </StackPanel>
+        <TextBlock Grid.Row="3" Margin="20" Text="{Binding ErrorMsg}" Foreground="#76e383" HorizontalAlignment="Center" />
     </Grid>
 </Window>

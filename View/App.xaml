@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:View"
              StartupUri="Authorization.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
