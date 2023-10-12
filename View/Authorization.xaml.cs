@@ -52,7 +52,28 @@ namespace View
         private async void OnImageClicked(object sender, RoutedEventArgs e) => GenerateNewCaptcha();
         private async void Auth(object sender, RoutedEventArgs e)
         {
-
+            if (CaptchaBox.Text == strCaptcha)
+            {
+                if (await manager.Auth(TextBoxLogin.Text, PasswordBox.Password))
+                {
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    TextBoxLogin.Text = String.Empty;
+                    PasswordBox.Password = String.Empty;
+                    CaptchaBox.Text = String.Empty;
+                    GenerateNewCaptcha();
+                    MessageBox.Show("Неверный логин/пароль");
+                }
+            }
+            else
+            {
+                GenerateNewCaptcha();
+                MessageBox.Show("Неверная капча");
+            }
         }
     }
 }
