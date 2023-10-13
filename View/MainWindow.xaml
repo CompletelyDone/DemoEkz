@@ -6,7 +6,46 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Window">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel>
+            <Grid Margin="0,0,-0.4,20" Height="651">
+                <DataGrid Background="#ffffff" 
+                          SelectionMode="Single" SelectionUnit="FullRow" 
+                          IsReadOnly="True" 
+                          AutoGenerateColumns="False" x:Name="ProductList" 
+                          Margin="40,20,40,39" Foreground="Black" 
+                          OpacityMask="#FF498C51" FontFamily="Comic Sans MS">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="White" />
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="Артикул" Width="100" Binding="{Binding Articul}" FontFamily="Comic Sans MS" />
+                        <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Title}" FontFamily="Comic Sans MS" />
+                        <DataGridTextColumn Header="Единица измерения" Width="80" Binding="{Binding Unit.Title}" FontFamily="Comic Sans MS" />
+                        <DataGridTextColumn Header="Цена" Width="100" Binding="{Binding Cost}"/>
+                        <DataGridTextColumn Header="Производитель" Width="*" Binding="{Binding Manufacturer}" FontFamily="Comic Sans MS" />
+                        <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Discription}" FontFamily="Comic Sans MS" />
+                        <DataGridTemplateColumn Header="Изображение" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Photo}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Категория товара" Width="*" Binding="{Binding Category}" FontFamily="Comic Sans MS" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

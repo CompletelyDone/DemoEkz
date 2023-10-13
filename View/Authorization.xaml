@@ -30,7 +30,9 @@
             <TextBox x:Name="CaptchaBox" FontSize="16" Padding="10"/>
             <Button x:Name="LoginButton" Content="Login" Padding="10,5" Margin="0,20,0,0"
                     Background="#498c51" Foreground="White" FontSize="16" BorderThickness="0" Click="Auth"/>
+            <Button x:Name="LoginAsGuestButton" Content="Login as Guest" Padding="10,5" Margin="0,20,0,0"
+                    Background="#498c51" Foreground="White" FontSize="16" BorderThickness="0" Click="AuthAsGuest"/>
         </StackPanel>
-        <TextBlock Grid.Row="3" Margin="20" Text="{Binding ErrorMsg}" Foreground="#76e383" HorizontalAlignment="Center" />
+        
     </Grid>
 </Window>

@@ -22,7 +22,6 @@ namespace View
     /// </summary>
     public partial class Authorization : Window
     {
-        DispatcherTimer timer;
         private int debugCounter = 15;
         DBManager manager;
         private string strCaptcha;
@@ -32,7 +31,6 @@ namespace View
             DataContext = this;
             manager = new DBManager();
             GenerateNewCaptcha();
-            timer = new DispatcherTimer();
 
         }
 
@@ -49,7 +47,7 @@ namespace View
             }
         }
 
-        private async void OnImageClicked(object sender, RoutedEventArgs e) => GenerateNewCaptcha();
+        private void OnImageClicked(object sender, RoutedEventArgs e) => GenerateNewCaptcha();
         private async void Auth(object sender, RoutedEventArgs e)
         {
             if (CaptchaBox.Text == strCaptcha)
@@ -74,6 +72,13 @@ namespace View
                 GenerateNewCaptcha();
                 MessageBox.Show("Неверная капча");
             }
+        }
+        private void AuthAsGuest(object sender, RoutedEventArgs e)
+        {
+            manager.role = 4;
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
     }
 }
