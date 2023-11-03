@@ -28,6 +28,7 @@ namespace View
             InitializeComponent();
             manager = new DBManager();
             ProductList.ItemsSource = manager.db.Product.Include(o => o.Unit).ToList();
+            ManufacturerCmbBox.ItemsSource = manager.db.Product.Select(o => o.Manufacturer).Distinct().ToList();
         }
         public void OnAddButtonClick(object sender, RoutedEventArgs e)
         {
@@ -37,7 +38,7 @@ namespace View
         public void OnEditButtonClick(object sender, RoutedEventArgs e)
         {
             Product product = ProductList.SelectedItem as Product;
-            if(product != null)
+            if (product != null)
             {
                 AddEditWindow window = new AddEditWindow(product.Articul);
                 window.Show();
@@ -46,10 +47,36 @@ namespace View
         public void OnRemoveButtonClick(object sender, RoutedEventArgs e)
         {
             Product product = ProductList.SelectedItem as Product;
-            if(product != null )
+            if (product != null)
             {
                 manager.db.Product.Remove(product);
                 manager.db.SaveChanges();
+            }
+        }
+
+        private void OnManufacturerChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ManufacturerCmbBox.SelectedValue != null)
+            {
+                ProductList.ItemsSource = manager.db.Product
+                .Where(o => o.Title.Contains(SearchBox.Text) && o.Manufacturer == ManufacturerCmbBox.SelectedValue.ToString())
+                .ToList();
+            }
+        }
+
+        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ManufacturerCmbBox.SelectedValue != null)
+            {
+                ProductList.ItemsSource = manager.db.Product
+                .Where(o => o.Title.Contains(SearchBox.Text) && o.Manufacturer == ManufacturerCmbBox.SelectedValue.ToString())
+                .ToList();
+            }
+            else
+            {
+                ProductList.ItemsSource = manager.db.Product
+                .Where(o => o.Title.Contains(SearchBox.Text))
+                .ToList();
             }
         }
     }
