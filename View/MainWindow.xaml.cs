@@ -27,7 +27,30 @@ namespace View
         {
             InitializeComponent();
             manager = new DBManager();
-            ProductList.ItemsSource = manager.db.Product.Include(o=>o.Unit).ToList();
+            ProductList.ItemsSource = manager.db.Product.Include(o => o.Unit).ToList();
+        }
+        public void OnAddButtonClick(object sender, RoutedEventArgs e)
+        {
+            AddEditWindow window = new AddEditWindow();
+            window.Show();
+        }
+        public void OnEditButtonClick(object sender, RoutedEventArgs e)
+        {
+            Product product = ProductList.SelectedItem as Product;
+            if(product != null)
+            {
+                AddEditWindow window = new AddEditWindow(product.Articul);
+                window.Show();
+            }
+        }
+        public void OnRemoveButtonClick(object sender, RoutedEventArgs e)
+        {
+            Product product = ProductList.SelectedItem as Product;
+            if(product != null )
+            {
+                manager.db.Product.Remove(product);
+                manager.db.SaveChanges();
+            }
         }
     }
 }
